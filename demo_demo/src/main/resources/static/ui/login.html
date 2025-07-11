@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+ <div ng-app="myApp" ng-controller="formCtrl">
+  <form novalidate>
+    First Name:<br>
+    <input type="text" ng-model="user.firstName"><br>
+    Last Name:<br>
+    <input type="text" ng-model="user.lastName">
+    <br>
+    Password:<br>
+    <input type="text" ng-model="user.password">
+    <br><br>
+    <p>{{user}}</p>
+    <button ng-click="reset()">Submit</button>
+  </form>
+  <p>form = {{user}}</p>
+  <p>master = {{master}}</p>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('formCtrl', function($scope, $http) {
+    $scope.user = {firstName:"", lastName:"",password:""};
+    $scope.reset = function() {
+        //$scope.user = angular.copy($scope.master);
+    	 $http.post('/app/user/createUser', $scope.user)
+         .then(function(response) {
+             console.log('Success:', response.data);
+         }, function(error) {
+             console.error('Error:', error);
+         });
+    };
+    $scope.reset();
+});
+</script>
+</body>
+</html>

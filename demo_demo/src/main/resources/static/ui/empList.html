@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Employee List</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<style>
+h2 {
+	text-align: center;
+	text-decoration: underline;
+	margin-bottom: 30px;
+}
+
+.employee-table {
+	margin-top: 40px;
+}
+</style>
+</head>
+<body>
+	<div class="container mt-3">
+		<h2>Employee List</h2>
+
+		<div class="employee-table">
+			<table class="table table-bordered table-striped">
+				<thead class="table-dark">
+					<tr>
+						<th>Name</th>
+						<th>Father Name</th>
+						<th>Salary</th>
+						<th>City</th>
+						<th>Contact Number</th>
+						<th>Email</th>
+						<th>Gender</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="emp in employees">
+						<td>{{emp.name}}</td>
+						<td>{{emp.fatherName}}</td>
+						<td>{{emp.salary}}</td>
+						<td>{{emp.city}}</td>
+						<td>{{emp.contactNumber}}</td>
+						<td>{{emp.email}}</td>
+						<td>{{emp.gender}}</td>
+						<td><span class="badge rounded-pill bg-primary" ng-click="updateData(emp.id)">Update</span><span class="badge rounded-pill bg-danger" ng-click="deleteEmployee(emp.id)">Delete</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

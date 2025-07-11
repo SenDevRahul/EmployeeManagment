@@ -1,0 +1,20 @@
+
+ <div class="container mt-3">
+  <h2>User Login</h2>
+  <form novalidate >
+    <div class="mb-3 mt-3">
+      <label for="userid">User id:</label>
+      <input type="text" class="form-control" id="userid" placeholder="Enter User Id" name="userid" ng-model="user.userId">
+    </div>
+    <div class="mb-3">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" ng-model="user.password">
+    </div>
+    <div class="form-check mb-3">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-primary" ng-click="login()">Submit</button>
+  </form>
+</div>
