@@ -24,6 +24,18 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl: "ui/empList.html",
 	  controller:"listCtrl"
     })
+	.when("/book-entry", {
+	      templateUrl: "ui/bookEntry.html",
+		  controller:"bookCtrl"
+	    })
+	.when("/search-book", {
+		templateUrl: "ui/bookList.html",
+		controller:"bookCtrl"
+	})	
+	.when("/updateBook/:id", {
+	      templateUrl: "ui/bookEntry.html",
+		  controller:"bookCtrl"
+	    })
     .otherwise({ redirectTo: "/" });
 });
 
@@ -36,12 +48,20 @@ app.controller("NavCtrl", function($scope,$location) {
 		window.location.href = '#!/dashboard/';
 	}
 	
+	/*var count=0;
+	if(count==0){
+	window.location.reload();
+	count++;
+	}*/
+	
 });
 
-app.controller("dashboardCtrl", function($scope,SessionService) {
+app.controller("dashboardCtrl", function($scope,$window,SessionService) {
   $scope.message = "hii..welcome to my Dashboard";
   var uname=SessionService.get("username");
   $scope.message="Hi "+uname;
+
+ 
 });
 
 
@@ -122,6 +142,7 @@ app.controller("listCtrl", function($scope,$http,$location) {
 			   
 			   $scope.updateData=function(id){
 				console.log('id = '+id); 
+				
 				window.location.href = "#!/update/" + id;
 			   }
   
@@ -156,6 +177,75 @@ app.controller('loginCtrl', function($scope, $http,SessionService) {
     };
 });
 
+app.controller("bookCtrl", function($scope,$http,$location,$routeParams) {
+	
+  $scope.book = {};
+  $scope.books=[];
+  $scope.bookId=$routeParams.id;
+  function init(){
+	console.log('coming..'+$scope.bookId);
+	if($scope.bookId){
+		$http.get("/app/book/getSingleBook/"+$scope.bookId)
+       .then(function(response) {
+		$scope.book = angular.copy(response.data);
+		console.log($scope.book);
+       }, function(error) {
+		console.error(error);
+         //alert("Error submitting data.");
+       });
+	}
+  }
+  
+  init();
+			  $scope.createBook=function(){
+				console.log($scope.book);
+				$http.post("/app/book/saveBook", $scope.book)
+				       .then(function(response) {
+						console.log(response.data);
+						$scope.book=response.data;
+				       }, function(error) {
+						console.error(error);
+				         alert("Error submitting data.");
+				       });
+				
+			  }
+			  $scope.getdata=function(){
+			  				$http.get("/app/book/getBook")
+			  						       .then(function(response) {
+			  								//console.log(response.data);
+			  								$scope.books=response.data;
+			  						       }, function(error) {
+			  								console.error(error);
+			  						         //alert("Error submitting data.");
+			  						       });
+			  			   }
+			  			   
+			  	$scope.updateData=function(id){
+			  				//console.log('id = '+id); 
+							$scope.bookId=id;
+							window.location.href = "#!/updateBook/" + id;	
+							//init();	
+			    }
+				
+			   $scope.deleteBook=function(id){
+			   			   console.log('id = '+id); 
+			   			   $http.get("/app/book/deleteBook/"+id)
+			   			   		       .then(function(response) {
+			   			   				console.log(response.data);
+			   			   				 if(response.data==true){
+			   								$scope.getdata();
+			   							 }
+			   			   		       }, function(error) {
+			   			   				console.error(error);
+			   			   		         //alert("Error submitting data.");
+			   			   		       });
+			   			   
+			   		   }
+});
+
+
+
+
 app.service("SessionService", function() {
     this.set = function(key, value) {
         sessionStorage.setItem(key, angular.toJson(value)); // store object as JSON string
@@ -173,4 +263,5 @@ app.service("SessionService", function() {
     this.clear = function() {
         sessionStorage.clear();
     };
+	
 });

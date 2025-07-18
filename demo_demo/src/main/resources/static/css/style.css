@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.fakeimg {
+	height: 200px;
+	background: #aaa;
+}
+ body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 950px;
+            margin: 30px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: 500;
+        }
+        
+        h2.book-heading {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 2rem;
+    color: #2c3e50;
+    border-bottom: 3px solid #007bff;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+        

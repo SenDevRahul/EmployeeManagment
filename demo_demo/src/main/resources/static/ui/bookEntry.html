@@ -1,0 +1,63 @@
+
+<div class="form-container">
+
+	<form name="bookForm" data-ng-submit="createBook()" novalidate>
+		<div class="row mb-3">
+			<div class="col-md-4">
+				<label for="bookName">Book Name:</label> <input type="text"
+					class="form-control" id="bookName" placeholder="Enter Book Name"
+					data-ng-model="book.bookName" name="bookName" required> <span
+					class="text-danger"
+					data-ng-show="bookForm.bookName.$touched && bookForm.bookName.$error.required">
+					Book Name is required. </span>
+			</div>
+
+			<div class="col-md-4">
+				<label for="writer">Writer:</label> <input type="text"
+					class="form-control" id="writer"
+					placeholder="Enter Book Writer Name" data-ng-model="book.writer"
+					name="writer" required> <span class="text-danger"
+					data-ng-show="bookForm.writer.$touched && bookForm.writer.$error.required">
+					Writer name is required. </span>
+			</div>
+
+			<div class="col-md-4">
+				<label for="publication">Publication:</label> <input type="text"
+					class="form-control" id="publication"
+					placeholder="Enter Publication" data-ng-model="book.publication"
+					name="publication" required> <span class="text-danger"
+					data-ng-show="bookForm.publication.$touched && bookForm.publication.$error.required">
+					Publication is required. </span>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-4">
+				<label for="blockNumber">Block Number:</label> <input type="text"
+					class="form-control" id="blockNumber"
+					placeholder="Enter Block Number" data-ng-model="book.blockNumber"
+					name="blockNumber" required> <span class="text-danger"
+					data-ng-show="bookForm.blockNumber.$touched && bookForm.blockNumber.$error.required">
+					Block Number is required. </span>
+			</div>
+
+			<div class="col-md-4">
+				<label for="subject">Subject:</label> <input type="text"
+					class="form-control" id="subject" placeholder="Enter Subject"
+					data-ng-model="book.subject" name="subject" required> <span
+					class="text-danger"
+					data-ng-show="bookForm.subject.$touched && bookForm.subject.$error.required">
+					Subject is required. </span>
+			</div>
+		</div>
+		<div class="alert alert-success mt-3" data-ng-show="book.bookId">
+			<p>Book created successfully. Book ID: {{book.bookId}}</p>
+		</div>
+		<div class="text-center">
+			<button class="btn btn-primary px-5" type="submit"
+				data-ng-disabled="bookForm.$invalid">Submit</button>
+		</div>
+	</form>
+
+</div>
+
